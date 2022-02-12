@@ -1,6 +1,5 @@
 package com.rr.android.network.connection
 
-
 import retrofit2.Call
 
 interface Connection {

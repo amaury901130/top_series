@@ -4,8 +4,21 @@
     <dimen name="loader_padding">30dp</dimen>
     <dimen name="loader_radius">10dp</dimen>
 
-    <!-- Sign Up -->
-    <dimen name="text_input_margin_top">20dp</dimen>
-    <dimen name="sign_up_margin_horizontal">45dp</dimen>
-    <dimen name="sign_up_button_height">48dp</dimen>
+    <!-- Spacing -->
+    <!-- Use this dimens for margin and padding -->
+    <dimen name="space_xs">2dp</dimen>
+    <dimen name="space_s">4dp</dimen>
+    <dimen name="space_n">8dp</dimen>
+    <dimen name="space_l">12dp</dimen>
+    <dimen name="space_xl">16dp</dimen>
+    <dimen name="space_xxl">20dp</dimen>
+    <dimen name="space_xxxl">24dp</dimen>
+
+    <!-- Text size -->
+    <dimen name="text_s">4dp</dimen>
+    <dimen name="text_n">8dp</dimen>
+    <dimen name="text_l">12dp</dimen>
+    <dimen name="text_xl">16dp</dimen>
+    <dimen name="text_xxl">20dp</dimen>
+    <dimen name="text_xxxl">24dp</dimen>
 </resources>
