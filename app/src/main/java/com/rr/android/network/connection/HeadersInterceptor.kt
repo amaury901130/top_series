@@ -1,4 +1,4 @@
-package com.rr.android.network.services
+package com.rr.android.network.connection
 
 import okhttp3.Interceptor
 import okhttp3.Response

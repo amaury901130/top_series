@@ -61,7 +61,7 @@ android {
     productFlavors {
         prod {
             dimension "server"
-            buildConfigField("String", "API_URL", "\"https://proj-production.herokuapp.com/api/\"")
+            buildConfigField("String", "API_URL", "\"https://api.tvmaze.com/\"")
             buildConfigField("String", "SECURE_FILE_NAME", "\"super_secure_name\"")
             buildConfigField("String", "SECURE_KEY_ALIAS", "\"super_secure_key_alias\"")
         }

@@ -1,14 +1,12 @@
 package com.rr.android.network.providers
 
 import com.rr.android.BuildConfig
-import com.rr.android.network.services.AuthenticationInterceptor
-import com.rr.android.network.services.HeadersInterceptor
-import com.rr.android.network.services.ResponseInterceptor
+import com.rr.android.network.connection.HeadersInterceptor
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -22,19 +20,14 @@ class ServiceProviderModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(
-        authenticationInterceptor: AuthenticationInterceptor,
-        responseInterceptor: ResponseInterceptor
-    ): OkHttpClient {
+    fun provideOkHttpClient(): OkHttpClient {
         val httpInterceptorLevel = if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY
-            else HttpLoggingInterceptor.Level.BASIC
+        else HttpLoggingInterceptor.Level.BASIC
 
         return OkHttpClient.Builder()
-                .addInterceptor(HeadersInterceptor())
-                .addInterceptor(authenticationInterceptor)
-                .addInterceptor(responseInterceptor)
-                .addInterceptor(HttpLoggingInterceptor().setLevel(httpInterceptorLevel))
-                .build()
+            .addInterceptor(HeadersInterceptor())
+            .addInterceptor(HttpLoggingInterceptor().setLevel(httpInterceptorLevel))
+            .build()
     }
 
     @Provides
@@ -45,10 +38,10 @@ class ServiceProviderModule {
             .add(KotlinJsonAdapterFactory())
             .build()
         return Retrofit.Builder()
-                .baseUrl(url)
-                .addConverterFactory(MoshiConverterFactory.create(moshi).withNullSerialization())
-                .client(okHttpClient)
-                .build()
+            .baseUrl(url)
+            .addConverterFactory(MoshiConverterFactory.create(moshi).withNullSerialization())
+            .client(okHttpClient)
+            .build()
     }
 
     companion object {

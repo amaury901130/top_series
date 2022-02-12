@@ -4,18 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.rr.android.R
+import com.rr.android.databinding.FragmentSeriesBinding
+import com.rr.android.ui.base.BaseFragment
 
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class SeriesFragment : BaseFragment() {
 
-class SeriesFragment : Fragment() {
+    private val binding: FragmentSeriesBinding by lazy {
+        FragmentSeriesBinding.inflate(this.layoutInflater)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_series, container, false)
-    }
+    ): View = binding.root
+
+
 }
