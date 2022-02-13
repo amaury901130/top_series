@@ -43,6 +43,7 @@ class ShowsFragment : BaseFragment(), ShowsAdapter.Actions {
             showsVM.vmState.observe(viewLifecycleOwner, ::onVmChangeState)
         }
         setUpBrowse()
+        binding.btnSettings.setOnClickListener { navigateTo(R.id.nav_to_settings) }
         super.onStarted()
     }
 
@@ -87,8 +88,10 @@ class ShowsFragment : BaseFragment(), ShowsAdapter.Actions {
         when (state) {
             ShowsVMStates.ITEMS_LOADED -> {
                 if (showsVM.shows.isNotEmpty()) {
+                    binding.emptyState.isVisible = false
                     showsAdapter.submitList(showsVM.shows)
                 } else {
+                    binding.emptyState.isVisible = true
                     simpleToast(R.string.no_browse_result)
                 }
             }

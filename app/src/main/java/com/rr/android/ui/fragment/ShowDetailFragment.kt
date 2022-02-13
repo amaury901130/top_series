@@ -39,6 +39,7 @@ class ShowDetailFragment : BaseFragment(), EpisodesAdapter.Actions {
 
     override fun onStarted() {
         with(binding) {
+            btnBack.setOnClickListener { requireActivity().onBackPressed() }
             showsVM.selectedShow?.let {
                 it.image?.original?.let { image ->
                     cover.loadUrl(image)

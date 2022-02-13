@@ -19,6 +19,16 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="Body2" parent="TextAppearance.AppCompat.Body2">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="PreferenceScreen">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="SubTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
         <item name="android:textColor">@color/primaryText</item>
         <item name="android:textSize">@dimen/text_l</item>

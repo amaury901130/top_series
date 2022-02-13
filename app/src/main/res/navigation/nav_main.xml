@@ -14,11 +14,21 @@
             app:destination="@id/nav_detail_screen"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
+
+        <action
+            android:id="@+id/nav_to_settings"
+            app:destination="@id/nav_settings_screen"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
         android:id="@+id/nav_detail_screen"
         android:name="com.rr.android.ui.fragment.ShowDetailFragment"
         tools:layout="@layout/fragment_show_detail" />
+
+    <fragment
+        android:id="@+id/nav_settings_screen"
+        android:name="com.rr.android.ui.fragment.SettingsFragment" />
 
 </navigation>

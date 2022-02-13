@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#222</color>
     <color name="primaryText">#fff</color>
     <color name="colorAccent">#ba000d</color>
+    <color name="menuIcon">#fff</color>
 
     <color name="title_back">#BF000000</color>
     <color name="app_bar_back">#1A000000</color>

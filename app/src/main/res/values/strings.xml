@@ -14,6 +14,13 @@
     <string name="browse_by_name_hint">Browse Shows by Name</string>
     <string name="browse_min_requiered">Min characters required 5</string>
     <string name="no_browse_result">There is anything to show for that criteria.</string>
+    <string name="no_content_error">Oops!! anything to show, \n try a different search</string>
+    <string name="fingerprint_error_unknown">Autentication Error</string>
+    <string name="error_override_hw_unavailable">Not finger print available</string>
+    <string name="text_fingerprint">Authenticate using your fingerprint</string>
+    <string name="enter_pin">Enter Pin</string>
+    <string name="confirm">Confirm</string>
+    <string name="error_pin">Wrong Pin, try again.</string>
     <plurals name="on_air">
         <item quantity="one">On air: %1s day</item>
         <item quantity="other">On air: %1s days</item>
@@ -22,4 +29,17 @@
         <item quantity="one">Genre: %1s</item>
         <item quantity="other">Genres: %1s</item>
     </plurals>
+    <!-- Preference Titles -->
+    <string name="security_header">Security</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="finger_print_title">Enable finger print</string>
+    <string name="enable_pin_title">Enable security Pin</string>
+    <string name="not_finger_print">Finger print is not available on your phone.</string>
+    <string name="finger_print_key">fingerPrint</string>
+    <string name="enable_pin_key">enablePin</string>
 </resources>

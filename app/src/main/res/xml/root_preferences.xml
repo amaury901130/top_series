@@ -1,0 +1,14 @@
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+    <PreferenceCategory app:title="@string/security_header">
+
+        <SwitchPreferenceCompat
+            app:key="@string/enable_pin_key"
+            app:title="@string/enable_pin_title" />
+
+        <SwitchPreferenceCompat
+            app:key="@string/finger_print_key"
+            app:title="@string/finger_print_title" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
