@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/surface">
+
+    <ImageView
+        android:id="@+id/btn_close"
+        android:layout_width="@dimen/close_btn_size"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_n"
+        android:layout_marginEnd="@dimen/space_n"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="0dp"
+        android:src="@drawable/ic_baseline_close_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/colorAccent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/cover"
+        android:layout_width="@dimen/episode_image_size"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/space_l"
+        android:background="@drawable/background_image_rounded_corners"
+        android:scaleType="fitXY"
+        app:layout_constraintDimensionRatio="16:12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_close"
+        app:shapeAppearanceOverlay="@style/ShapeableImageViewCover" />
+
+    <ImageView
+        android:id="@+id/btn_play"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="@dimen/close_btn_size"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/space_n"
+        android:layout_marginEnd="@dimen/space_n"
+        android:alpha="0.8"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="0dp"
+        android:src="@drawable/ic_baseline_play_circle_outline_24"
+        app:layout_constraintBottom_toBottomOf="@id/cover"
+        app:layout_constraintEnd_toEndOf="@id/cover"
+        app:layout_constraintStart_toStartOf="@id/cover"
+        app:layout_constraintTop_toTopOf="@id/cover"
+        app:tint="@color/colorAccent" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginHorizontal="@dimen/space_l"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@id/cover"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cover"
+        app:layout_constraintTop_toTopOf="@id/cover">
+
+        <TextView
+            android:id="@+id/tv_season"
+            style="@style/Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:lines="1" />
+
+        <TextView
+            android:id="@+id/tv_episode"
+            style="@style/Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:lines="1" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="start" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_summary"
+        style="@style/Body"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/space_l"
+        android:layout_marginTop="@dimen/space_n"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@id/cover"
+        app:layout_constraintTop_toBottomOf="@id/cover" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

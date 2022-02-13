@@ -9,6 +9,8 @@
     <string name="default_error">Error</string>
     <string name="rating">Rating: %1s/10</string>
     <string name="season">Season %1s</string>
+    <string name="episode_no">Episode %1s</string>
+    <string name="not_implemented">Not implemented</string>
     <plurals name="on_air">
         <item quantity="one">On air: %1s day</item>
         <item quantity="other">On air: %1s days</item>

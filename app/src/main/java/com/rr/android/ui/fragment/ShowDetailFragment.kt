@@ -14,6 +14,7 @@ import com.rr.android.models.lifeTime
 import com.rr.android.ui.adapter.EpisodesAdapter
 import com.rr.android.ui.adapter.SeasonsAdapter
 import com.rr.android.ui.base.BaseFragment
+import com.rr.android.ui.modal.EpisodeDetailsModal
 import com.rr.android.ui.viewmodel.SeriesVM
 import com.rr.android.ui.viewmodel.ShowsVMStates
 import com.rr.android.util.STRING_EMPTY
@@ -87,6 +88,6 @@ class ShowDetailFragment : BaseFragment(), EpisodesAdapter.Actions {
     }
 
     override fun onEpisodeSelect(episode: Episode) {
-        // TODO: show bottom sheet fragment
+        EpisodeDetailsModal.show(parentFragmentManager, episode)
     }
 }

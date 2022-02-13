@@ -33,7 +33,7 @@
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/cover_tiny"
-            android:layout_width="80dp"
+            android:layout_width="@dimen/show_cover_tiny_size"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/space_xl"
             android:background="@drawable/background_image_rounded_corners"

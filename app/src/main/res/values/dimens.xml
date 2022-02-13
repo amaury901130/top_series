@@ -22,4 +22,7 @@
     <dimen name="text_xxl">20sp</dimen>
     <dimen name="text_xxxl">24sp</dimen>
     <dimen name="rounded_corner">5dp</dimen>
+    <dimen name="episode_image_size">150dp</dimen>
+    <dimen name="show_cover_tiny_size">80dp</dimen>
+    <dimen name="close_btn_size">48dp</dimen>
 </resources>
