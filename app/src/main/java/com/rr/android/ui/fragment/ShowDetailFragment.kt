@@ -5,6 +5,7 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rr.android.R
@@ -78,8 +79,9 @@ class ShowDetailFragment : BaseFragment(), EpisodesAdapter.Actions {
                     seasonsAdapter.submitList(it)
                 }
             }
+            ShowsVMStates.LOADING -> binding.browseProgress.isVisible = true
             ShowsVMStates.ERROR -> showError(showsVM.error)
-            ShowsVMStates.IDLE -> {}
+            ShowsVMStates.IDLE -> binding.browseProgress.isVisible = false
         }
     }
 

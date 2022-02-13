@@ -64,7 +64,7 @@ class SeriesVM @Inject constructor(
 
     private fun browseQuery() {
         viewModelScope.launch {
-            _currentState.value = ShowsVMStates.BROWSE_LOADING
+            _currentState.value = ShowsVMStates.LOADING
             _browseByQuery.collect {
                 if (it.isNotEmpty()) {
                     shows.addAll(it)
@@ -84,7 +84,7 @@ class SeriesVM @Inject constructor(
     fun loadEpisodes() {
         _seasons.clear()
         viewModelScope.launch {
-            _currentState.value = ShowsVMStates.BROWSE_LOADING
+            _currentState.value = ShowsVMStates.LOADING
             _browseEpisodes?.collect {
                 if (it.isNotEmpty()) {
                     _seasons.addAll(it)
@@ -97,9 +97,9 @@ class SeriesVM @Inject constructor(
         }
     }
 
-    private fun browseAllShows() {
+    fun browseAllShows() {
         viewModelScope.launch {
-            _currentState.value = ShowsVMStates.BROWSE_LOADING
+            _currentState.value = ShowsVMStates.LOADING
             _browseFlow.collect {
                 if (it.isNotEmpty()) {
                     shows.addAll(it)
@@ -110,6 +110,12 @@ class SeriesVM @Inject constructor(
                 idle()
             }
         }
+    }
+
+    fun clean() {
+        currentQuery = INITIAL_QUERY
+        shows.clear()
+        page = INITIAL_PAGE
     }
 
     fun selectShow(show: Show) {
@@ -123,5 +129,5 @@ class SeriesVM @Inject constructor(
 }
 
 enum class ShowsVMStates {
-    ITEMS_LOADED, ERROR, IDLE, EPISODES_LOADED, BROWSE_LOADING
+    ITEMS_LOADED, ERROR, IDLE, EPISODES_LOADED, LOADING
 }

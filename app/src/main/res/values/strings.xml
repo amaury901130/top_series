@@ -11,7 +11,7 @@
     <string name="season">Season %1s</string>
     <string name="episode_no">Episode %1s</string>
     <string name="not_implemented">Not implemented</string>
-    <string name="browse_by_name_hint">Browse by Shows Name</string>
+    <string name="browse_by_name_hint">Browse Shows by Name</string>
     <string name="browse_min_requiered">Min characters required 5</string>
     <string name="no_browse_result">There is anything to show for that criteria.</string>
     <plurals name="on_air">

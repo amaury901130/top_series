@@ -47,20 +47,31 @@ class ShowsFragment : BaseFragment(), ShowsAdapter.Actions {
     }
 
     private fun setUpBrowse() {
-        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                binding.root.runAfterInactivityPeriod({ browseQuery(query) }, 0)
-                return true
-            }
+        with(binding.searchView) {
+            setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    binding.root.runAfterInactivityPeriod({ browseQuery(query) }, 0)
+                    return true
+                }
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                binding.root.runAfterInactivityPeriod(
-                    { browseQuery(newText) },
-                    MIN_TIME_BEFORE_QUERY
-                )
-                return true
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    binding.root.runAfterInactivityPeriod(
+                        { browseQuery(newText) },
+                        MIN_TIME_BEFORE_QUERY
+                    )
+                    return true
+                }
+            })
+
+            setOnCloseListener {
+                with(showsVM) {
+                    showsAdapter.submitList(null)
+                    clean()
+                    browseAllShows()
+                }
+                true
             }
-        })
+        }
     }
 
     private fun browseQuery(query: String?) {
@@ -82,7 +93,7 @@ class ShowsFragment : BaseFragment(), ShowsAdapter.Actions {
                 }
             }
             ShowsVMStates.ERROR -> showError(showsVM.error)
-            ShowsVMStates.BROWSE_LOADING -> binding.browseProgress.isVisible = true
+            ShowsVMStates.LOADING -> binding.browseProgress.isVisible = true
             ShowsVMStates.IDLE -> binding.browseProgress.isVisible = false
         }
     }
