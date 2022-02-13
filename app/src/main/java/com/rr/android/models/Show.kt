@@ -1,6 +1,13 @@
 package com.rr.android.models
 
-data class Serie(
+import android.annotation.SuppressLint
+import com.rr.android.util.DATE_FORMAT
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.concurrent.TimeUnit
+
+data class Show(
     val _links: Links?,
     val averageRuntime: Int? = 0,
     val ended: String?,
@@ -75,3 +82,15 @@ data class Country(
     val name: String?,
     val timezone: String?
 )
+
+@SuppressLint("SimpleDateFormat")
+fun Show.lifeTime(): Long {
+    return premiered?.let {
+        val format = SimpleDateFormat(DATE_FORMAT)
+        val releaseDate: Date = format.parse(it)
+        val endDate: Date = ended?.run { format.parse(this) } ?: Calendar.getInstance().time
+        val diff: Long = endDate.time - releaseDate.time
+
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)
+    } ?: 0L
+}

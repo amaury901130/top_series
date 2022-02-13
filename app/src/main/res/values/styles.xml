@@ -11,6 +11,23 @@
 
     <style name="Title" parent="TextAppearance.AppCompat.Title">
         <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="Body" parent="TextAppearance.AppCompat.Body1">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="SubTitle" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/primaryText</item>
+        <item name="android:textSize">@dimen/text_l</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="ShapeableImageViewCover">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/rounded_corner</item>
     </style>
 
 </resources>

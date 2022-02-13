@@ -7,4 +7,14 @@
     <string name="generic_error">There was an unexpected error</string>
     <string name="error">ERROR</string>
     <string name="default_error">Error</string>
+    <string name="rating">Rating: %1s/10</string>
+    <string name="season">Season %1s</string>
+    <plurals name="on_air">
+        <item quantity="one">On air: %1s day</item>
+        <item quantity="other">On air: %1s days</item>
+    </plurals>
+    <plurals name="genre">
+        <item quantity="one">Genre: %1s</item>
+        <item quantity="other">Genres: %1s</item>
+    </plurals>
 </resources>

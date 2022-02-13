@@ -6,5 +6,5 @@ interface BaseView {
 
     fun hideProgress()
 
-    fun showError(message: String?)
+    fun showError(message: String? = null)
 }

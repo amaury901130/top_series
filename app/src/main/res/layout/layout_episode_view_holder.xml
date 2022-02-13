@@ -19,39 +19,26 @@
             android:id="@+id/cover"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            app:layout_constraintDimensionRatio="9:16"
+            app:layout_constraintDimensionRatio="16:12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/SubTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/title_back"
-            android:orientation="vertical"
-            android:padding="@dimen/space_n"
+            android:ellipsize="end"
+            android:gravity="start"
+            android:lines="1"
+            android:padding="@dimen/space_xl"
             app:layout_constraintBottom_toBottomOf="@+id/cover"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <TextView
-                android:id="@+id/tv_title"
-                style="@style/Title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:gravity="start"
-                android:lines="1" />
-
-            <TextView
-                android:id="@+id/rating"
-                style="@style/SubTitle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/rating" />
-
-        </LinearLayout>
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

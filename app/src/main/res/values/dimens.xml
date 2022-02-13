@@ -15,10 +15,11 @@
     <dimen name="space_xxxl">24dp</dimen>
 
     <!-- Text size -->
-    <dimen name="text_s">4dp</dimen>
-    <dimen name="text_n">8dp</dimen>
-    <dimen name="text_l">12dp</dimen>
-    <dimen name="text_xl">16dp</dimen>
-    <dimen name="text_xxl">20dp</dimen>
-    <dimen name="text_xxxl">24dp</dimen>
+    <dimen name="text_s">4sp</dimen>
+    <dimen name="text_n">8sp</dimen>
+    <dimen name="text_l">12sp</dimen>
+    <dimen name="text_xl">16sp</dimen>
+    <dimen name="text_xxl">20sp</dimen>
+    <dimen name="text_xxxl">24sp</dimen>
+    <dimen name="rounded_corner">5dp</dimen>
 </resources>

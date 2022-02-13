@@ -16,6 +16,12 @@ fun ImageView.loadUri(uri: Uri) {
         .into(this)
 }
 
+fun ImageView.loadUrl(url: String) {
+    Glide.with(context)
+        .load(url)
+        .into(this)
+}
+
 /**
 * Add more extensions in case you need it
 * */
