@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
+import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rr.android.R
@@ -13,6 +15,7 @@ import com.rr.android.ui.adapter.ShowsAdapter
 import com.rr.android.ui.base.BaseFragment
 import com.rr.android.ui.viewmodel.SeriesVM
 import com.rr.android.ui.viewmodel.ShowsVMStates
+import com.rr.android.util.extensions.runAfterInactivityPeriod
 
 class ShowsFragment : BaseFragment(), ShowsAdapter.Actions {
 
@@ -39,14 +42,48 @@ class ShowsFragment : BaseFragment(), ShowsAdapter.Actions {
             observeNetwork(this)
             showsVM.vmState.observe(viewLifecycleOwner, ::onVmChangeState)
         }
+        setUpBrowse()
         super.onStarted()
+    }
+
+    private fun setUpBrowse() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                binding.root.runAfterInactivityPeriod({ browseQuery(query) }, 0)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                binding.root.runAfterInactivityPeriod(
+                    { browseQuery(newText) },
+                    MIN_TIME_BEFORE_QUERY
+                )
+                return true
+            }
+        })
+    }
+
+    private fun browseQuery(query: String?) {
+        query?.let {
+            if (it.length >= MIN_QUERY_SIZE) {
+                showsAdapter.submitList(null)
+                showsVM.browseBy(it.trim())
+            }
+        }
     }
 
     private fun onVmChangeState(state: ShowsVMStates) {
         when (state) {
-            ShowsVMStates.ITEMS_LOADED -> showsAdapter.submitList(showsVM.shows)
+            ShowsVMStates.ITEMS_LOADED -> {
+                if (showsVM.shows.isNotEmpty()) {
+                    showsAdapter.submitList(showsVM.shows)
+                } else {
+                    simpleToast(R.string.no_browse_result)
+                }
+            }
             ShowsVMStates.ERROR -> showError(showsVM.error)
-            ShowsVMStates.IDLE -> {}
+            ShowsVMStates.BROWSE_LOADING -> binding.browseProgress.isVisible = true
+            ShowsVMStates.IDLE -> binding.browseProgress.isVisible = false
         }
     }
 
@@ -57,5 +94,7 @@ class ShowsFragment : BaseFragment(), ShowsAdapter.Actions {
 
     companion object {
         private const val LIST_SPAN_COUNT = 3
+        private const val MIN_QUERY_SIZE = 5
+        private const val MIN_TIME_BEFORE_QUERY = 500L
     }
 }

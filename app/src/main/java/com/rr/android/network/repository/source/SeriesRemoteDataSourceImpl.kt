@@ -17,6 +17,12 @@ class SeriesRemoteDataSourceImpl @Inject constructor(
         )
     }
 
+    override suspend fun browseByQuery(query: String): Result<Data<List<Show>>> {
+        return actionCallback.call(
+            seriesService.browseShowsByQuery(query)
+        )
+    }
+
     override suspend fun browseEpisodesByShow(showId: Int): Result<Data<List<Episode>>> {
         return actionCallback.call(
             seriesService.browseEpisodes(showId)

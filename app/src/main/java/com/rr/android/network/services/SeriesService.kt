@@ -11,6 +11,9 @@ interface SeriesService {
     @GET("shows")
     fun browseShowsByPage(@Query("page") page: Int): Call<List<Show>>
 
+    @GET("shows")
+    fun browseShowsByQuery(@Query("q") query: String): Call<List<Show>>
+
     @GET("shows/{id}/episodes")
     fun browseEpisodes(@Path("id") showId: Int): Call<List<Episode>>
 }

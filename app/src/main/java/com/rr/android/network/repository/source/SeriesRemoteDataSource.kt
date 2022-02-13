@@ -6,5 +6,6 @@ import com.rr.android.network.connection.Data
 
 interface SeriesRemoteDataSource {
     suspend fun browseByPage(page: Int): Result<Data<List<Show>>>
+    suspend fun browseByQuery(query: String): Result<Data<List<Show>>>
     suspend fun browseEpisodesByShow(showId: Int): Result<Data<List<Episode>>>
 }

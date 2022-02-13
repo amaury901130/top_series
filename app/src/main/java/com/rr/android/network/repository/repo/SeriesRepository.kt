@@ -7,4 +7,5 @@ import kotlinx.coroutines.flow.Flow
 interface SeriesRepository {
     fun getShowsByPage(page: Int): Flow<List<Show>>
     fun getEpisodesByShow(showId: Int): Flow<List<Season>>
+    fun getShowsByQuery(query: String): Flow<List<Show>>
 }

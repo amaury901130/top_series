@@ -37,4 +37,14 @@ class SeriesRepositoryImpl @Inject constructor(
             emit(emptyList())
         }
     }
+
+    override fun getShowsByQuery(query: String): Flow<List<Show>> = flow {
+        try {
+            val response = remoteDataSource.browseByQuery(query)
+            emit(response.getOrNull()?.value ?: emptyList())
+        } catch (ignore: Exception) {
+            Log.e("API", ignore.toString())
+            emit(emptyList())
+        }
+    }
 }

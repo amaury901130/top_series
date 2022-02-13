@@ -2,6 +2,7 @@ package com.rr.android.ui.base
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -57,5 +58,9 @@ open class BaseFragment : Fragment(), BaseView {
             it as BaseNavActivity
             it.navigateTo(routeOrAction, bundle)
         }
+    }
+
+    fun simpleToast(message: Int) {
+        Toast.makeText(context, message, Toast.LENGTH_LONG).show()
     }
 }

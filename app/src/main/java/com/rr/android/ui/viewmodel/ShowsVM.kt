@@ -7,7 +7,6 @@ import com.rr.android.models.Season
 import com.rr.android.models.Show
 import com.rr.android.network.repository.repo.SeriesRepository
 import com.rr.android.ui.base.BaseViewModel
-import com.rr.android.util.NetworkState
 import com.rr.android.util.STRING_EMPTY
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
@@ -27,9 +26,7 @@ class SeriesVM @Inject constructor(
     val selectedShow: Show?
         get() = _selectedShow
 
-    private var _newItems: MutableList<Show> = mutableListOf()
-    val shows: List<Show>
-        get() = _newItems
+    val shows: MutableList<Show> = mutableListOf()
 
     private var _seasons: MutableList<Season> = mutableListOf()
     val seasons: List<Season>
@@ -45,26 +42,49 @@ class SeriesVM @Inject constructor(
     private val _browseEpisodes: Flow<List<Season>>?
         get() = selectedShow?.id?.let { return@let seriesRepository.getEpisodesByShow(it) }
 
+    private val _browseByQuery: Flow<List<Show>>
+        get() = seriesRepository.getShowsByQuery(currentQuery)
+
     init {
-        browseSeries()
+        browseAllShows()
     }
 
-    private fun browseBy(query: String = STRING_EMPTY) {
+    fun browseBy(query: String = STRING_EMPTY) {
         if (currentQuery != query) {
             currentQuery = query
             page = INITIAL_PAGE
+            shows.clear()
             if (currentQuery.isEmpty()) {
-                _newItems.clear()
-                browseSeries()
+                browseAllShows()
             } else {
-                // TODO: browse by query
+                browseQuery()
             }
         }
+    }
+
+    private fun browseQuery() {
+        viewModelScope.launch {
+            _currentState.value = ShowsVMStates.BROWSE_LOADING
+            _browseByQuery.collect {
+                if (it.isNotEmpty()) {
+                    shows.addAll(it)
+                    _currentState.value = ShowsVMStates.ITEMS_LOADED
+                } else {
+                    _currentState.value = ShowsVMStates.ERROR
+                }
+                idle()
+            }
+        }
+    }
+
+    private fun idle() {
+        _currentState.value = ShowsVMStates.IDLE
     }
 
     fun loadEpisodes() {
         _seasons.clear()
         viewModelScope.launch {
+            _currentState.value = ShowsVMStates.BROWSE_LOADING
             _browseEpisodes?.collect {
                 if (it.isNotEmpty()) {
                     _seasons.addAll(it)
@@ -72,21 +92,22 @@ class SeriesVM @Inject constructor(
                 } else {
                     _currentState.value = ShowsVMStates.ERROR
                 }
+                idle()
             }
         }
     }
 
-    private fun browseSeries() {
+    private fun browseAllShows() {
         viewModelScope.launch {
-            _networkState.value = NetworkState.loading
+            _currentState.value = ShowsVMStates.BROWSE_LOADING
             _browseFlow.collect {
                 if (it.isNotEmpty()) {
-                    _newItems.addAll(it)
+                    shows.addAll(it)
                     _currentState.value = ShowsVMStates.ITEMS_LOADED
                 } else {
                     _currentState.value = ShowsVMStates.ERROR
                 }
-                _networkState.value = NetworkState.idle
+                idle()
             }
         }
     }
@@ -102,5 +123,5 @@ class SeriesVM @Inject constructor(
 }
 
 enum class ShowsVMStates {
-    ITEMS_LOADED, ERROR, IDLE, EPISODES_LOADED
+    ITEMS_LOADED, ERROR, IDLE, EPISODES_LOADED, BROWSE_LOADING
 }
