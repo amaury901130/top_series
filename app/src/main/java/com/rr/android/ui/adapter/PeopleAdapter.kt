@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.Glide
 import com.rr.android.databinding.LayoutSimpleDataViewHolderBinding
-import com.rr.android.models.Episode
+import com.rr.android.models.People
 import com.rr.android.ui.base.BaseViewHolder
 
-class EpisodesAdapter(val actions: Actions?) :
-    ListAdapter<Episode, BaseViewHolder<Episode>>(diffCallBack) {
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<Episode> {
+class PeopleAdapter(val actions: Actions?) :
+    ListAdapter<People, BaseViewHolder<People>>(diffCallBack) {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<People> {
         val binding = LayoutSimpleDataViewHolderBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
@@ -20,35 +20,35 @@ class EpisodesAdapter(val actions: Actions?) :
         return SeriesViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: BaseViewHolder<Episode>, position: Int) {
+    override fun onBindViewHolder(holder: BaseViewHolder<People>, position: Int) {
         holder.bindTo(
             getItem(position)
         )
     }
 
     inner class SeriesViewHolder(private val binding: LayoutSimpleDataViewHolderBinding) :
-        BaseViewHolder<Episode>(binding) {
-        override fun bindTo(item: Episode) {
+        BaseViewHolder<People>(binding) {
+        override fun bindTo(item: People) {
             with(binding) {
                 tvTitle.text = item.name
                 item.image?.original?.let { Glide.with(root.context).load(it).into(cover) }
-                content.setOnClickListener { actions?.onEpisodeSelect(item) }
+                content.setOnClickListener { actions?.onPeopleSelect(item) }
             }
         }
     }
 
     interface Actions {
-        fun onEpisodeSelect(episode: Episode)
+        fun onPeopleSelect(people: People)
     }
 
     companion object {
-        val diffCallBack: DiffUtil.ItemCallback<Episode> =
-            object : DiffUtil.ItemCallback<Episode>() {
-                override fun areItemsTheSame(oldItem: Episode, newItem: Episode): Boolean {
+        val diffCallBack: DiffUtil.ItemCallback<People> =
+            object : DiffUtil.ItemCallback<People>() {
+                override fun areItemsTheSame(oldItem: People, newItem: People): Boolean {
                     return oldItem.id == newItem.id
                 }
 
-                override fun areContentsTheSame(oldItem: Episode, newItem: Episode): Boolean {
+                override fun areContentsTheSame(oldItem: People, newItem: People): Boolean {
                     return areItemsTheSame(oldItem, newItem)
                 }
             }

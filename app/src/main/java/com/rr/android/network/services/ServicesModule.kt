@@ -10,7 +10,7 @@ import retrofit2.Retrofit
 @InstallIn(SingletonComponent::class)
 class ServicesModule {
     @Provides
-    fun provideSeriesService(retrofit: Retrofit): SeriesService {
-        return retrofit.create(SeriesService::class.java)
+    fun provideSeriesService(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 }

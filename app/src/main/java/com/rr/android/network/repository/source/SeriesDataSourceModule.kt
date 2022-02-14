@@ -12,5 +12,9 @@ abstract class SeriesDataSourceModule {
 
     @Binds
     @Singleton
-    abstract fun remoteDataSource(seriesRemoteDataSource: SeriesRemoteDataSourceImpl): SeriesRemoteDataSource
+    abstract fun showsRemoteDataSource(seriesRemoteDataSource: SeriesRemoteDataSourceImpl): SeriesRemoteDataSource
+
+    @Binds
+    @Singleton
+    abstract fun peopleRemoteDataSource(peopleRemoteDataSource: PeopleRemoteDataSourceImpl): PeopleRemoteDataSource
 }

@@ -12,4 +12,8 @@ abstract class RepoModule {
     @Binds
     @Singleton
     abstract fun seriesRepo(seriesRepository: SeriesRepositoryImpl): SeriesRepository
+
+    @Binds
+    @Singleton
+    abstract fun peopleRepo(peopleRepository: PeopleRepositoryImpl): PeopleRepository
 }

@@ -4,12 +4,12 @@ import com.rr.android.models.Episode
 import com.rr.android.models.Show
 import com.rr.android.network.connection.Connection
 import com.rr.android.network.connection.Data
-import com.rr.android.network.services.SeriesService
+import com.rr.android.network.services.ApiService
 import javax.inject.Inject
 
 class SeriesRemoteDataSourceImpl @Inject constructor(
     private val actionCallback: Connection,
-    private val seriesService: SeriesService
+    private val seriesService: ApiService
 ) : SeriesRemoteDataSource {
     override suspend fun browseByPage(page: Int): Result<Data<List<Show>>> {
         return actionCallback.call(
