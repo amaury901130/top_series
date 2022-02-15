@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.rr.android.R
 import com.rr.android.databinding.FragmentSeriesBinding
@@ -16,6 +17,8 @@ import com.rr.android.ui.base.BaseFragment
 import com.rr.android.ui.viewmodel.SeriesVM
 import com.rr.android.ui.viewmodel.ShowsVMStates
 import com.rr.android.util.extensions.runAfterInactivityPeriod
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class ShowsFragment : BaseFragment(), ShowsAdapter.Actions {
 
@@ -40,11 +43,20 @@ class ShowsFragment : BaseFragment(), ShowsAdapter.Actions {
         }
         with(showsVM) {
             observeNetwork(this)
-            showsVM.vmState.observe(viewLifecycleOwner, ::onVmChangeState)
+            lifecycleScope.launch {
+                showsVM.vmState.collect { state -> onVmChangeState(state) }
+            }
         }
         setUpBrowse()
-        binding.btnSettings.setOnClickListener { navigateTo(R.id.nav_to_settings) }
+        setUpMenuActions()
         super.onStarted()
+    }
+
+    private fun setUpMenuActions() {
+        with(binding) {
+            btnSettings.setOnClickListener { navigateTo(R.id.nav_to_settings) }
+            btnPeople.setOnClickListener { navigateTo(R.id.nav_people_screen) }
+        }
     }
 
     private fun setUpBrowse() {

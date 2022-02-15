@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.rr.android.R
 import com.rr.android.databinding.FragmentShowDetailBinding
@@ -20,6 +21,8 @@ import com.rr.android.ui.viewmodel.SeriesVM
 import com.rr.android.ui.viewmodel.ShowsVMStates
 import com.rr.android.util.STRING_EMPTY
 import com.rr.android.util.extensions.loadUrl
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 class ShowDetailFragment : BaseFragment(), EpisodesAdapter.Actions {
 
@@ -66,7 +69,9 @@ class ShowDetailFragment : BaseFragment(), EpisodesAdapter.Actions {
                     layoutManager = LinearLayoutManager(context)
                     adapter = seasonsAdapter
                 }
-                showsVM.vmState.observe(viewLifecycleOwner, ::onVmChangeState)
+                lifecycleScope.launch {
+                    showsVM.vmState.collect { state -> onVmChangeState(state) }
+                }
                 showsVM.loadEpisodes()
             }
         }

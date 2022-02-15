@@ -1,5 +1,6 @@
 package com.rr.android.network.services
 
+import com.rr.android.models.CrewCredits
 import com.rr.android.models.Episode
 import com.rr.android.models.People
 import com.rr.android.models.Show
@@ -20,4 +21,7 @@ interface ApiService {
 
     @GET("people")
     fun browsePeople(@Query("q") query: String, @Query("page") page: Int): Call<List<People>>
+
+    @GET("people/{id}/crewcredits?embed=show")
+    fun browsePeopleShows(@Path("id") peopleId: Int): Call<List<CrewCredits>>
 }

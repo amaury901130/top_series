@@ -20,6 +20,12 @@
             app:destination="@id/nav_settings_screen"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right" />
+
+        <action
+            android:id="@+id/nav_to_people"
+            app:destination="@id/nav_people_screen"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
     </fragment>
 
     <fragment
@@ -30,5 +36,25 @@
     <fragment
         android:id="@+id/nav_settings_screen"
         android:name="com.rr.android.ui.fragment.SettingsFragment" />
+
+    <fragment
+        android:id="@+id/nav_people_screen"
+        android:name="com.rr.android.ui.fragment.PeopleSearchFragment">
+        <action
+            android:id="@+id/nav_to_people_details"
+            app:destination="@id/nav_people_details_screen"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_people_details_screen"
+        android:name="com.rr.android.ui.fragment.PeopleDetailFragment">
+        <action
+            android:id="@+id/nav_to_show_details"
+            app:destination="@id/nav_detail_screen"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
 
 </navigation>

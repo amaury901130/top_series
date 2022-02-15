@@ -1,7 +1,5 @@
 package com.rr.android.ui.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.rr.android.models.Season
 import com.rr.android.models.Show
@@ -10,6 +8,8 @@ import com.rr.android.ui.base.BaseViewModel
 import com.rr.android.util.STRING_EMPTY
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -32,8 +32,8 @@ class SeriesVM @Inject constructor(
     val seasons: List<Season>
         get() = _seasons
 
-    private val _currentState = MutableLiveData(ShowsVMStates.IDLE)
-    val vmState: LiveData<ShowsVMStates>
+    private val _currentState = MutableStateFlow(ShowsVMStates.IDLE)
+    val vmState: StateFlow<ShowsVMStates>
         get() = _currentState
 
     private val _browseFlow: Flow<List<Show>>
@@ -64,13 +64,13 @@ class SeriesVM @Inject constructor(
 
     private fun browseQuery() {
         viewModelScope.launch {
-            _currentState.value = ShowsVMStates.LOADING
+            _currentState.emit(ShowsVMStates.LOADING)
             _browseByQuery.collect {
                 if (it.isNotEmpty()) {
                     shows.addAll(it)
-                    _currentState.value = ShowsVMStates.ITEMS_LOADED
+                    _currentState.emit(ShowsVMStates.ITEMS_LOADED)
                 } else {
-                    _currentState.value = ShowsVMStates.ERROR
+                    _currentState.emit(ShowsVMStates.ERROR)
                 }
                 idle()
             }
@@ -78,19 +78,19 @@ class SeriesVM @Inject constructor(
     }
 
     private fun idle() {
-        _currentState.value = ShowsVMStates.IDLE
+        viewModelScope.launch { _currentState.emit(ShowsVMStates.IDLE) }
     }
 
     fun loadEpisodes() {
         _seasons.clear()
         viewModelScope.launch {
-            _currentState.value = ShowsVMStates.LOADING
+            _currentState.emit(ShowsVMStates.LOADING)
             _browseEpisodes?.collect {
                 if (it.isNotEmpty()) {
                     _seasons.addAll(it)
-                    _currentState.value = ShowsVMStates.EPISODES_LOADED
+                    _currentState.emit(ShowsVMStates.EPISODES_LOADED)
                 } else {
-                    _currentState.value = ShowsVMStates.ERROR
+                    _currentState.emit(ShowsVMStates.ERROR)
                 }
                 idle()
             }
@@ -99,13 +99,13 @@ class SeriesVM @Inject constructor(
 
     fun browseAllShows() {
         viewModelScope.launch {
-            _currentState.value = ShowsVMStates.LOADING
+            _currentState.emit(ShowsVMStates.LOADING)
             _browseFlow.collect {
                 if (it.isNotEmpty()) {
                     shows.addAll(it)
-                    _currentState.value = ShowsVMStates.ITEMS_LOADED
+                    _currentState.emit(ShowsVMStates.ITEMS_LOADED)
                 } else {
-                    _currentState.value = ShowsVMStates.ERROR
+                    _currentState.emit(ShowsVMStates.ERROR)
                 }
                 idle()
             }

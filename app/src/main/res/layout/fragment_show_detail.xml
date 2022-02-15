@@ -95,8 +95,7 @@
                 android:id="@+id/rating"
                 style="@style/Body"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/rating" />
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
 

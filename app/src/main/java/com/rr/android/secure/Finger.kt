@@ -1,6 +1,5 @@
 package com.rr.android.secure
 
-
 import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
@@ -44,7 +43,6 @@ class Finger @JvmOverloads constructor(
     private val handler = Handler()
     private var fingerListener: FingerListener? = null
 
-    // lazy initialization as maybe never assigned
     private val biometricManager: BiometricManager? by lazy {
         BiometricManager.from(context)
     }

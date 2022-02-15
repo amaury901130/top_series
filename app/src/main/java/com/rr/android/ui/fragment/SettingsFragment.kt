@@ -71,8 +71,8 @@ class SettingsFragment : PreferenceFragmentCompat() {
     }
 
     private fun setupNewPin() {
-        //TODO: setUpNewPin
-        //USE THIS PIN TEMPORALLY
+        // TODO: setUpNewPin
+        // USE THIS PIN TEMPORALLY
         sessionVM.saveNewPin("0000")
     }
 }
